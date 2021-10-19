@@ -43,6 +43,7 @@ websocket = None
 
 telegram_bot = TelegramBotHelper(app)
 
+margin_text = "0%"
 s = sched.scheduler(time.time, time.sleep)
 
 def signal_handler(signum, frame):
