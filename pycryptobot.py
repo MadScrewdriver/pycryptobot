@@ -43,7 +43,6 @@ websocket = None
 
 telegram_bot = TelegramBotHelper(app)
 
-margin_text = "0%"
 s = sched.scheduler(time.time, time.sleep)
 
 def signal_handler(signum, frame):
@@ -59,6 +58,9 @@ def executeJob(
     trading_data=pd.DataFrame(),
 ):
     """Trading bot job which runs at a scheduled interval"""
+    
+    margin_text = "0%"
+
 
     # This is used to control some API calls when using websockets
     last_api_call_datetime = datetime.now() - state.last_api_call_datetime
