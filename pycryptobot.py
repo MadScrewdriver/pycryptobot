@@ -25,7 +25,7 @@ from models.TradingAccount import TradingAccount
 from views.TradingGraphs import TradingGraphs
 from models.helper.TextBoxHelper import TextBox
 from models.exchange.binance import WebSocketClient as BWebSocketClient
-from models.exchange.coinbase_pro import WebSocketClient as CWebSocketClient
+from models.exchange.coinbase_pro import WebSocketClient as CWebSocketClient, MINIMUM_TRADE_AMOUNT
 from models.helper.TelegramBotHelper import TelegramBotHelper
 
 # minimal traceback
@@ -958,13 +958,20 @@ def executeJob(
                 # if live
                 if app.isLive():
                     if not app.insufficientfunds:
-                        app.notifyTelegram(
-                            app.getMarket()
-                            + " ("
-                            + app.printGranularity()
-                            + ") BUY at "
-                            + price_text
-                        )
+                        if MINIMUM_TRADE_AMOUNT >= int(account.basebalance):
+                            app.notifyTelegram(
+                                app.getMarket()
+                                + " ("
+                                + app.printGranularity()
+                                + ") BUY at "
+                                + price_text
+                            )
+                        else:
+                            app.notifyTelegram(
+                                app.getMarket()
+                                + "Not enough founds to buy with: €"
+                                + str(account.basebalance)
+                            )
 
                         if not app.isVerbose():
                             Logger.info(
