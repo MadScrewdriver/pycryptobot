@@ -958,7 +958,7 @@ def executeJob(
                 # if live
                 if app.isLive():
                     if not app.insufficientfunds:
-                        if MINIMUM_TRADE_AMOUNT >= int(account.basebalance):
+                        if MINIMUM_TRADE_AMOUNT <= int(account.basebalance):
                             app.notifyTelegram(
                                 app.getMarket()
                                 + " ("
