@@ -958,7 +958,7 @@ def executeJob(
                 # if live
                 if app.isLive():
                     if not app.insufficientfunds:
-                        if MINIMUM_TRADE_AMOUNT <= float(account.getBalance(app.getQuoteCurrency()):
+                        if MINIMUM_TRADE_AMOUNT <= float(account.getBalance(app.getQuoteCurrency())):
                             app.notifyTelegram(
                                 app.getMarket()
                                 + " ("
@@ -970,7 +970,7 @@ def executeJob(
                             app.notifyTelegram(
                                 app.getMarket()
                                 + " Not enough founds to buy with: €"
-                                + str(account.getBalance(app.getQuoteCurrency()) + " you need €" + str(MINIMUM_TRADE_AMOUNT)
+                                + str(account.getBalance(app.getQuoteCurrency())) + " you need €" + str(MINIMUM_TRADE_AMOUNT)
                             )
 
                         if not app.isVerbose():
